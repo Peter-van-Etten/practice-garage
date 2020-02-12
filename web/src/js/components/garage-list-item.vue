@@ -120,7 +120,8 @@
             "brand v-model-brand"
             "country v-model-country";
         /* for some reason justify-items isn't working properly yet... */
-        justify-items: end | start;
+        /* justify-items: end | start; */
+        justify-items: stretch;
     }
 
     .name { grid-area: name; }

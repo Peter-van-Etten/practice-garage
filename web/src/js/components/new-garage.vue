@@ -13,7 +13,7 @@
             <input type="text" class="col-sm-8" v-model="garage.postal_country"/>
         </div>
         <div class="row">
-            <button class="pull-right btn btn-success" @click="save">Save</button>
+            <button class="pull-right btn btn-primary-new" @click="save">Save</button>
         </div>
     </div>
 </template>

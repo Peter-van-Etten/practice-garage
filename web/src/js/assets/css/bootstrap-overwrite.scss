@@ -1,0 +1,91 @@
+// Bootstrap color variables
+$blue: blue;
+$indigo: indigo;
+$purple: purple;
+$pink: pink;
+$red: red;
+$orange: orange;
+$yellow: yellow;
+$green: green;
+$teal: teal;
+$cyan: cyan;
+$white: white;
+$gray: gray;
+$gray-dark: dimgray;
+$light: whitesmoke;
+$dark: black;
+
+// Theme-color variables
+$primary: $blue;
+$secondary: $gray;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+
+// Custom (theme-)color variables
+$primary-new: darkorange;
+
+
+
+
+
+$colors: (
+    // Edit bootstrap root-colors
+    "blue": $blue,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "teal": $teal,
+    "cyan": $cyan,
+    "white": $white,
+    "gray": $gray,
+    "gray-dark": $gray-dark,
+) !default;
+
+
+$theme-colors: (
+    // Edit bootstrap theme-colors
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark,
+
+    // Add custom bootstrap theme-colors
+    "primary-new": $primary-new,
+) !default;
+
+
+// Standard class overwrite
+[class*="text-primary"] { color: $primary; }
+[class*="text-secondary"] { color: $secondary; }
+[class*="text-success"] { color: $success; }
+[class*="text-info"] { color: $info; }
+[class*="text-warning"] { color: $warning; }
+[class*="text-danger"] { color: $danger; }
+[class*="text-light"] { color: $light; }
+[class*="text-dark"] { color: $dark; }
+
+[class*="bg-primary"] { background-color: $primary; }
+[class*="bg-secondary"] { background-color: $secondary; }
+[class*="bg-success"] { background-color: $success; }
+[class*="bg-info"] { background-color: $info; }
+[class*="bg-warning"] { background-color: $warning; }
+[class*="bg-danger"] { background-color: $danger; }
+[class*="bg-light"] { background-color: $light; }
+[class*="bg-dark"] { background-color: $dark; }
+
+
+
+
+
+// Bootstrap MUST be imported AFTER all custom css, this has to do with Bootstraps Sass compiler!
+@import "node_modules/bootstrap/scss/bootstrap";

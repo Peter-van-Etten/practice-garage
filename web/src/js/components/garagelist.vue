@@ -5,7 +5,7 @@
 			<new-garage @change="garageList=$event"></new-garage>
 		</div>
 		<ul class="list-group">
-		    <li v-for="g in garageList" class="list-group-item">
+		    <li v-for="g in garageList" :key="g.id" class="list-group-item">
 				<!-- when a garage item is deleted it will raise change event and return the new list -->
 				<garage-list-item :garage="g" @change="garageList=$event">hello</garage-list-item>
 			</li>
