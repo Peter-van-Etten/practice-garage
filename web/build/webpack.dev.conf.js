@@ -10,7 +10,6 @@ function resolve (dir) {
 module.exports = {
     mode: 'development',
     context: path.resolve(__dirname, '..'),
-    // watch: true,
     entry: {
         app: './src/js/main.js'
     },
@@ -22,7 +21,7 @@ module.exports = {
         // Make sure to use [name] or [id] in output.filename
         //  when using multiple entry points
         filename: "[name].js",
-        // chunkFilename: "[name].chunk.js",
+        chunkFilename: "[name].chunk.js",
         path: resolve("../app/static/dist")
     },
     plugins: [

@@ -1,21 +1,19 @@
 <template>
-    <div>
-        <h3>{{title}}</h3>
-        <div class="row">
-            <label class="col-sm-4">Name</label>
-            <input type="text" class="col-sm-8" v-model="name"/>
-        </div>
-        <div class="row">
-            <label class="col-sm-4">Brand</label>
-            <input type="text" class="col-sm-8" v-model="garage.brand"/>
-        </div>
-        <div class="row">
-            <label class="col-sm-4">Country</label>
-            <input type="text" class="col-sm-8" v-model="garage.postal_country"/>
-        </div>
-        <div class="row">
-            <button class="pull-right btn btn-success" @click="save">Save</button>
-        </div>
+    <div class="col">
+        <form>
+            <div class="form-group">
+                <input type="text" id="name" class="form-control form-control-sm" placeholder="name" v-model="name">
+            </div>
+            <div class="form-group">
+                <input type="text" id="brand" class="form-control form-control-sm" placeholder="brand" v-model="garage.brand">
+            </div>
+            <div class="form-group">
+                <input type="text" id="country" class="form-control form-control-sm" placeholder="country" v-model="garage.postal_country">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" @click.prevent="save">Save</button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -82,14 +80,9 @@
                     }
                     Object.assign(this.garage, this.myGarage)
                 }
-            },
-
-        },
-        watch: {
+            }
         }
     }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

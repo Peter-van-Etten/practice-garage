@@ -1,27 +1,37 @@
 <template>
-	<div class="grid-container">
-		<div class="title">
-			<h1>Garages</h1>
-			<new-garage @change="garageList=$event"></new-garage>
+	<div class="container-margin-top">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<h1>Garages</h1>
+			</div>
 		</div>
-		<ul class="list-group">
-		    <li v-for="g in garageList" :key="g.id" class="list-group-item">
-				<!-- when a garage item is deleted it will raise change event and return the new list -->
-				<garage-list-item :garage="g" @change="garageList=$event">hello</garage-list-item>
-			</li>
-		</ul>
+		<div class="row margin-top">
+			<div class="col-sm-4">
+				<new-garage @change="garageList = $event"></new-garage>
+			</div>
+			<div class="col-sm-8">
+				<transition-group name="fade" tag="ul">
+					<li v-for="item in garageList" :key="item.id">
+						<!-- when a garage item is deleted it will raise change event and return the new list -->
+						<garage-list-item :garage="item" @change="garageList = $event"></garage-list-item>
+					</li>
+				</transition-group>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-    import GarageListItem from "./garage-list-item";
-    import GarageForm from "./garage-form";
-	import NewGarage from "./new-garage";
+    import GarageListItem from "./garage-list-item"
+	import NewGarage from "./new-garage"
 
 	export default {
 		name: 'garage-list',
-		components: {NewGarage, GarageListItem, GarageForm},
-		data: function () {
+		components: {
+			'new-garage': NewGarage,
+			'garage-list-item': GarageListItem
+		},
+		data() {
 			return {
 				garageList: []
 			}
@@ -39,27 +49,13 @@
 				}).always(() => {
 					// this.loading = false
 				})
-			},
+			}
 		},
-		created: function() {
+		created() {
 			this.load();
 		}
 	}
 
 </script>
 
-<style scoped>
-	.grid-container {
-		display: grid;
-		grid-template-columns: 2fr 6fr;
-		grid-gap: 10px;
-		grid-auto-rows: min-content;
-		grid-template-areas:
-			"title garage-list ";
-	}
-
-	.title { grid-area: title;
-		margin-right: 20px;}
-	.list-group { grid-area: garage-list; }
-
-</style>
+<style scoped></style>
