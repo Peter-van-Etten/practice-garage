@@ -1,21 +1,33 @@
 <template>
-    <div>
-        <div class="row">
-            <label class="col-sm-4">Name</label>
-            <input type="text" class="col-sm-8" v-model="garage.name"/>
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Name</span>
+                </div>
+                <input type="text" id="name" class="form-control" v-model="garage.name">
+            </div>
         </div>
-        <div class="row">
-            <label class="col-sm-4">Brand</label>
-            <input type="text" class="col-sm-8" v-model="garage.brand"/>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Brand</span>
+                </div>
+                <input type="text" id="brand" class="form-control" v-model="garage.brand">
+            </div>
         </div>
-        <div class="row">
-            <label class="col-sm-4">Country</label>
-            <input type="text" class="col-sm-8" v-model="garage.postal_country"/>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Country</span>
+                </div>
+                <input type="text" id="country" class="form-control" v-model="garage.postal_country">
+            </div>
         </div>
-        <div class="row">
-            <button class="pull-right btn btn-success" @click="save">Save</button>
+        <div class="form-group">
+            <button class="btn btn-success btn-block" @click.prevent="save">Save</button>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -46,10 +58,20 @@
                     // this.loading = false
                 })
             },
+            resetForm() {
+                if (this.garage.id) {
+                    Object.assign(this.myGarage, this.garage)
+                } else {
+                    this.myGarage = {
+                        name: '',
+                        brand: '',
+                        postal_country: ''
+                    }
+                    Object.assign(this.garage, this.myGarage)
+                }
+            }
         }
     }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

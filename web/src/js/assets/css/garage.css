@@ -1,0 +1,30 @@
+.fade-enter-active{animation:fade-in 300ms ease-in forwards;}
+.fade-leave-active{animation:fade-out 300ms ease-out forwards;}
+@keyframes fade-in{from{transform:scale(1.01);opacity:0;}to{transform:scale(1);opacity:1;}}
+@keyframes fade-out{from{transform:scale(1);opacity:1;}to{transform:scale(.99);opacity:0;}}
+
+ul {
+    list-style: none;
+}
+
+.container-margin-top {
+    margin-top: 10vh;
+}
+
+.margin-top {
+    margin-top: 2rem;
+}
+
+/* bootstrap css */
+.card-body span {
+    display: block;
+    min-height: 1px;
+    margin-bottom: 1rem;
+}
+
+/* bootstrap css 'disabled' does not work??? */
+.card a.disabled {
+    color: darkgray;
+    pointer-events: none;
+    cursor: not-allowed;
+}

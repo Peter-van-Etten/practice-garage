@@ -1,22 +1,27 @@
 <template>
-    <div>
-        <h1>Home</h1>
-        <h2>{{ msg }}</h2>
-        <router-link to="/garages">Garages</router-link>
+    <div class="container-margin-top">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1>Home</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2>{{ this.$store.state.msg }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center margin-top">
+                <router-link :to="{ name: 'garages' }" tag="a" class="btn btn-primary">Garages</router-link>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Home",
-        data () {
-            return {
-                msg: 'Welcome to Your Appengine/Vue app the garage'
-            }
-        }
+        name: "Home"
     }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
