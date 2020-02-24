@@ -2,13 +2,13 @@
     <div class="col">
         <form>
             <div class="form-group">
-                <input type="text" id="name" class="form-control form-control-sm" placeholder="name" v-model="name">
+                <input type="text" id="garage" class="form-control form-control-sm" placeholder="garage" v-model="car.garage">
             </div>
             <div class="form-group">
-                <input type="text" id="brand" class="form-control form-control-sm" placeholder="brand" v-model="garage.brand">
+                <input type="text" id="brand" class="form-control form-control-sm" placeholder="brand" v-model="car.brand">
             </div>
             <div class="form-group">
-                <input type="text" id="country" class="form-control form-control-sm" placeholder="country" v-model="garage.postal_country">
+                <input type="text" id="licence_plate" class="form-control form-control-sm" placeholder="license plate" v-model="car.license_plate">
             </div>
             <div class="form-group">
                 <button class="btn btn-success" @click.prevent="save">Save</button>
@@ -19,9 +19,9 @@
 
 <script>
     export default {
-        name: "garage-form",
+        name: "car-form",
         props: {
-            garage: {
+            car: {
                 type: Object,
                 required: false,
                 default: ''
@@ -29,56 +29,59 @@
         },
         computed: {
             title() {
-                return this.garage.id ? 'Edit garage': 'Add new garage'
+                return this.car.license_plate ? 'Edit car': 'Add new car'
             },
             name: {
                 set(val) {
-                    this.garage.name = name
+                    this.car.brand = val
                 },
                 get() {
-                    return this.garage.name
+                    return this.car.brand
                 }
             }
         },
         data() {
             return {
-                myGarage: {}
+                myCar: {}
             }
         },
         mounted() {
-            console.log(JSON.stringify(this.garage))
-            Object.assign(this.myGarage, this.garage)
+            console.log(JSON.stringify(this.car))
+            Object.assign(this.myCar, this.car)
         },
         methods:{
             save() {
-                if (this.garage.id) {
-                    Object.assign(this.myGarage, this.garage)
+                if (this.car.license_plate) {
+                    Object.assign(this.myCar, this.car)
                 }
                 $.ajax({
-					type: this.myGarage.id ? 'PUT':'POST',
-					url: `/garages/`,
+					type: this.myCar.id ? 'PUT':'POST',
+					url: `/garages/carlist/`,
 					contentType: 'application/json',
-                    data: JSON.stringify(this.myGarage),
+                    data: JSON.stringify(this.myCar),
 					timeout: 2000
 				}).then((data) => {
                     this.$emit('change', data)
-                    if (this.garage.id === undefined){
+                    if (this.car.id === undefined){
                         this.resetForm()
                     }
 				}).always(() => {
 					// this.loading = false
-				})
+                })
+            },
+            nothing() {
+                pass
             },
             resetForm() {
-                if (this.garage.id) {
-                    Object.assign(this.myGarage, this.garage)
+                if (this.car.license_plate) {
+                    Object.assign(this.myCar, this.car)
                 } else {
-                    this.myGarage = {
-                        name: '',
+                    this.myCar = {
+                        garage: '',
                         brand: '',
-                        postal_country: ''
+                        license_plate: ''
                     }
-                    Object.assign(this.garage, this.myGarage)
+                    Object.assign(this.car, this.myCar)
                 }
             }
         }

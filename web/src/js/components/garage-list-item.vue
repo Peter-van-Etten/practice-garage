@@ -8,8 +8,11 @@
                 <span></span>
                 <a href="#" class="card-link" @click.prevent="refresh">Refresh</a>
                 <template v-if="!editing">
-                    <a href="#" class="card-link" @click.prevent="editing = !editing">Edit</a>
-                    <a href="#" class="card-link text-danger" @click.prevent="deleteGarage">Delete</a>
+                    <a href="#" class="card-link" @click.prevent="editing = !editing">Edit</a>                    
+                    <!-- pve aanpassing voor clickable 'list-cars' tekst -->
+                    <!-- <a href="#" class="card-link text-muted text-uppercase" @click.prevent="listCars">List of Cars</a> -->
+                    <router-link :to="{ name: 'cars', params: { garageId:garage.id } }" tag="a" class="card-link">List of Cars</router-link>
+                    <a href="#" class="card-link text-danger" @click.prevent="deleteGarage">Delete Garage</a>
                 </template>
                 <template v-else>
                     <!-- <a href="#" class="card-link disabled" @click.prevent="save">Save</a> -->
@@ -70,6 +73,19 @@
                 }).always(() => {
                 })
             },
+            // pve hier zou een lijst met CARS moeten worden 'opgebouwd'
+            // pve geeft een change-event
+            // listCars() {
+            //     $.ajax({
+            //         type: 'LIST',
+            //         contentType: 'application/json',
+            //         url: `/${this.garage.id}/carlist/`,
+            //         data: JSON.stringify({'garage': this.garage.id})
+            //     }).then((data) => {
+            //         this.$emit('change', data)
+            //     }).always(() => {
+            //     })
+            // },
             refresh() {
                 $.ajax({
                     type: 'GET',
