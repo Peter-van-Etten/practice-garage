@@ -2,7 +2,7 @@
     <div class="col">
         <form>
             <div class="form-group">
-                <input type="text" id="name" class="form-control form-control-sm" placeholder="name" v-model="name">
+                <input type="text" id="name" class="form-control form-control-sm" placeholder="name" v-model="garage.name">
             </div>
             <div class="form-group">
                 <input type="text" id="brand" class="form-control form-control-sm" placeholder="brand" v-model="garage.brand">
@@ -46,7 +46,7 @@
             }
         },
         mounted() {
-            console.log(JSON.stringify(this.garage))
+            // console.log(JSON.stringify(this.garage))
             Object.assign(this.myGarage, this.garage)
         },
         methods:{

@@ -1,11 +1,6 @@
 <template>
     <form>
         <div class="form-group">
-                <!-- pve should this be change-able in the new-car form? -->
-                <p>Garage: {{ car.id }}</p>
-
-        </div>
-        <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Brand</span>
@@ -24,9 +19,9 @@
         <div class="form-group">
             <button class="btn btn-success btn-block" @click.prevent="save">Save</button>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <button class="btn btn-success btn-block" @click.prevent="resetForm">Reset</button>
-        </div>
+        </div> -->
     </form>
 </template>
 
@@ -36,18 +31,25 @@
         data() {
             return {
                 car: {
-                    garage: '',
+                    garage_id: this.garage.id,
                     brand: '',
                     license_plate: ''
                 }
             }
         },
+        props: {
+            garage: {
+                required: true
+            }
+        },
         methods: {
             save() {
-                console.log(this.garage)
+                // console.log('in new-car.save')
+                // console.log('this.garage.id', this.garage.id)                
+                // console.log('this.car.brand', this.car.brand)
                 $.ajax({
                     type: 'POST',
-                    url: `/garages/carlist/`,
+                    url: `/cars/`,
                     contentType: 'application/json',
                     data: JSON.stringify(this.car),
                     timeout: 2000
@@ -59,14 +61,18 @@
                 })
             },
             resetForm() {
+                // console.log('in new-car/resetForm')
                 if (this.car.id) {
+                    // console.log('in new-car/resetForm, this.car.id:', this.car.id)
                     Object.assign(this.myCar, this.car)
                 } else {
+                    // console.log('in new-car/resetForm, else')
                     this.myCar = {
-                        garage: '',
+                        garage_id: this.garage.id,
                         brand: '',
                         license_plate: ''
                     }
+                    // console.log('in new-car/resetForm, this.mycar:', this.mycar)
                     Object.assign(this.car, this.myCar)
                 }
             }

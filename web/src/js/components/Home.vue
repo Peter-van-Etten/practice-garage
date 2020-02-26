@@ -2,7 +2,7 @@
     <div class="container-margin-top">
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h1>Nice Cars...</h1>
+                <h1>Garages and Stuff</h1>
             </div>
         </div>
         <div class="row">

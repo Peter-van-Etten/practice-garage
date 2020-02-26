@@ -2,9 +2,6 @@
     <div class="col">
         <form>
             <div class="form-group">
-                <input type="text" id="garage" class="form-control form-control-sm" placeholder="garage" v-model="car.garage">
-            </div>
-            <div class="form-group">
                 <input type="text" id="brand" class="form-control form-control-sm" placeholder="brand" v-model="car.brand">
             </div>
             <div class="form-group">
@@ -25,11 +22,15 @@
                 type: Object,
                 required: false,
                 default: ''
-            }
+            },       
+            garage: {
+                type: Object,
+                required: true
+            },
         },
         computed: {
             title() {
-                return this.car.license_plate ? 'Edit car': 'Add new car'
+                return this.car.id ? 'Edit car': 'Add new car'
             },
             name: {
                 set(val) {
@@ -46,17 +47,19 @@
             }
         },
         mounted() {
-            console.log(JSON.stringify(this.car))
+            // console.log('in car-form, mounted:')
+            // console.log(JSON.stringify(this.car))
             Object.assign(this.myCar, this.car)
         },
         methods:{
             save() {
-                if (this.car.license_plate) {
+                // console.log('in car-form save, this.Mycar: ', this.Mycar)
+                if (this.car.id) {
                     Object.assign(this.myCar, this.car)
                 }
                 $.ajax({
 					type: this.myCar.id ? 'PUT':'POST',
-					url: `/garages/carlist/`,
+					url: `/cars/`,
 					contentType: 'application/json',
                     data: JSON.stringify(this.myCar),
 					timeout: 2000
@@ -73,7 +76,7 @@
                 pass
             },
             resetForm() {
-                if (this.car.license_plate) {
+                if (this.car.id) {
                     Object.assign(this.myCar, this.car)
                 } else {
                     this.myCar = {

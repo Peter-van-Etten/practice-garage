@@ -44,7 +44,7 @@
         },
         methods: {
             save() {
-                console.log(this.garage)
+                // console.log('in new-garage - load, garage: ', this.garage.id)
                 $.ajax({
                     type: 'POST',
                     url: `/garages/`,

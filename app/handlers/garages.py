@@ -28,10 +28,8 @@ def garage_list():
         ]
     )
 
-
 @bp.route('/', methods=["POST"])
 def garage_add():
-
     garage = Garage.add(props=request.json)
     return garage_list()
 
@@ -39,27 +37,13 @@ def garage_add():
 def garage_update():
     props = request.json
     garage = Garage.get(key=props.pop('id'))
-    # print(garage)
     garage.update(props=props)
     return garage_list()
 
 @bp.route('/', methods=["DELETE"])
 def garage_delete():
+    # also: delete all cars in garage
     garage = Garage.get(key=request.json.pop('garage'))
     garage.delete()
     return garage_list()
-
-@bp.route('/<int:garage_id>/cars')
-def list_cars_from_garage(garage_id):
-    garage = Garage.get(key=garage_id)
-    cars = Car.list(garage=garage)
-    return jsonify(
-        [
-            {
-                'id': car.id,
-                'brand': car.brand,
-                'postal_country': car.license_plate
-            } for car in cars
-        ]
-    ) 
 

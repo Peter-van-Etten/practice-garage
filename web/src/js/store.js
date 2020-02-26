@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        msg: 'Welcome to The Best Garage-Application in Town',
+        msg: 'Welcome to the Garage-Application',
         garageList: [],
         garage: {
             name: '',
@@ -17,10 +17,6 @@ export default new Vuex.Store({
         editing: false,
         myGarage: {}
     },
-    // hier zou ik een aanvulling verwachten:
-    // - list van car-objecten  sleutel is garage-key en licenceplate?
-    // - lokaal car-object,
-    // - list van bijbehorende actions.
     mutations: {},
     actions: {
         load() {},

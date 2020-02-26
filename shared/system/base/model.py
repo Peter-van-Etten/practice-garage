@@ -111,6 +111,12 @@ class HBKeyWrapper(object):
         '''
         with datastore.client.context():
             return self._key.get_async(**kwargs)
+            
+    # PVE added property id
+    @property
+    def id(self):
+        with datastore.client.context():
+            return self._key.id()
 
     @property
     def key(self):

@@ -2,7 +2,7 @@
 	<div class="container-margin-top">
 		<div class="row">
 			<div class="col-sm-12 text-center">
-				<h1>My Own Garages</h1>
+				<h1>Overview of Garages</h1>
 			</div>
 		</div>
 		<div class="row margin-top">
@@ -11,9 +11,8 @@
 			</div>
 			<div class="col-sm-8">
 				<transition-group name="fade" tag="ul">
-					<li v-for="item in garageList" :key="item.id">
-						<!-- when a garage item is deleted it will raise change event and return the new list -->
-						<garage-list-item :garage="item" @change="garageList = $event"></garage-list-item>
+					<li v-for="garage in garageList" :key="garage.id">
+						<garage-list-item :garage=garage @change="garageList = $event"></garage-list-item>
 					</li>
 				</transition-group>
 			</div>
@@ -36,7 +35,6 @@
 				garageList: []
 			}
 		},
-		// pve wat doet deze method? met name de URL / sleutel / content?
 		methods: {
 			load() {
 				$.ajax({
@@ -45,7 +43,7 @@
 					contentType: 'application/json',
 					timeout: 60000
 				}).then((data) => {
-					console.log(data)
+					// console.log(data)
 					this.garageList = data
 				}).always(() => {
 					// this.loading = false

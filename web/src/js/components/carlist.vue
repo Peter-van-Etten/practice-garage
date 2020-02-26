@@ -2,19 +2,17 @@
 	<div class="container-margin-top">
 		<div class="row">
 			<div class="col-sm-12 text-center">
-				<h1>Cars in this garage</h1>
+				<h1>Cars in {{ garage.name }}</h1>
 			</div>
 		</div>
 		<div class="row margin-top">
 			<div class="col-sm-4">
-				<!-- pve added component -->
-				<new-car @change="carlist = $event"></new-car>
+				<new-car :garage="garage" @change="carlist = $event"></new-car>
 			</div>
 			<div class="col-sm-8">
 				<transition-group name="fade" tag="ul">
-					<li v-for="item in carlist" :key="item.id">
-						<!-- when a garage item is deleted it will raise change event and return the new list ?? pve -->
-						<car-list-item :car="item" @change="carlist = $event"></car-list-item>
+					<li v-for="car in carlist" :key="car.id">
+						<car-list-item :car="car" :garage="garage" @change="carlist = $event"></car-list-item>
 					</li>
 				</transition-group>
 			</div>
@@ -34,9 +32,10 @@
 			'car-list-item': CarListItem
 		},
         props: {
-            garageId: {
+            garage: {
+				type: Object,
                 required: true
-            }
+			}
         },
 		data() {
 			return {
@@ -47,11 +46,11 @@
 			load() {
 				$.ajax({
 					type: 'GET',
-					url: `/garages/${this.garageId}/cars`,
+					url: `/cars/cars-from-garage/${this.garage.id}`,
 					contentType: 'application/json',
 					timeout: 60000
 				}).then((data) => {
-					console.log(data)
+					// console.log(data)
 					this.carlist = data
 				}).always(() => {
 					// this.loading = false

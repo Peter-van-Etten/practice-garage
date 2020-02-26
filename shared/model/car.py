@@ -6,7 +6,6 @@ from google.cloud import ndb
 class Car(BaseModel):
     garage = HBKeyProperty()
     brand = ndb.StringProperty()
-
     license_plate = ndb.StringProperty()
 
     @classmethod

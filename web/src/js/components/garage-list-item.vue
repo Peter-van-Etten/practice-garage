@@ -2,20 +2,17 @@
     <div>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{ garage.name }}</h5>
-                <p class="card-subtitle text-muted">{{ garage.brand }}</p>
-                <p class="card-subtitle text-muted text-uppercase">{{ garage.postal_country }}</p>
+                <h5 class="card-title">Garage: {{ garage.name }}</h5>
+                <p class="card-subtitle text-muted">Brand: {{ garage.brand }}</p>
+                <p class="card-subtitle text-muted">Country: {{ garage.postal_country }}</p>
                 <span></span>
                 <a href="#" class="card-link" @click.prevent="refresh">Refresh</a>
                 <template v-if="!editing">
                     <a href="#" class="card-link" @click.prevent="editing = !editing">Edit</a>                    
-                    <!-- pve aanpassing voor clickable 'list-cars' tekst -->
-                    <!-- <a href="#" class="card-link text-muted text-uppercase" @click.prevent="listCars">List of Cars</a> -->
-                    <router-link :to="{ name: 'cars', params: { garageId:garage.id } }" tag="a" class="card-link">List of Cars</router-link>
+                    <router-link :to="{ name: 'cars', params: { garage: garage } }" tag="a" class="card-link">List of Cars</router-link>
                     <a href="#" class="card-link text-danger" @click.prevent="deleteGarage">Delete Garage</a>
                 </template>
                 <template v-else>
-                    <!-- <a href="#" class="card-link disabled" @click.prevent="save">Save</a> -->
                     <a href="#" class="card-link text-danger" @click.prevent="editing = !editing; Object.assign(garage, updated_garage)">Cancel</a>
                 </template>
             </div>
@@ -49,20 +46,8 @@
             this.updated_garage = Object.assign({}, this.garage)
         },
         methods: {
-            // save() {
-            //     this.editing = false
-            //     $.ajax({
-            //         type: 'PUT',
-            //         contentType: 'application/json',
-            //         url: `/garages/`,
-            //         data: JSON.stringify(this.garage)
-            //     }).then((data) => {
-            //         // this.$emit('change', data)
-            //         Object.assign(this.updated_garage, this.garage)
-            //     }).always(() => {
-            //     })
-            // },
             deleteGarage() {
+                // PVE make sure to delete all cars from garage!
                 $.ajax({
                     type: 'DELETE',
                     contentType: 'application/json',
@@ -73,26 +58,13 @@
                 }).always(() => {
                 })
             },
-            // pve hier zou een lijst met CARS moeten worden 'opgebouwd'
-            // pve geeft een change-event
-            // listCars() {
-            //     $.ajax({
-            //         type: 'LIST',
-            //         contentType: 'application/json',
-            //         url: `/${this.garage.id}/carlist/`,
-            //         data: JSON.stringify({'garage': this.garage.id})
-            //     }).then((data) => {
-            //         this.$emit('change', data)
-            //     }).always(() => {
-            //     })
-            // },
             refresh() {
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json',
-                    url: `/garages/?garage=${this.garage.id}`,
+                    url: `/garages/`,
                 }).then((data) => {
-                    console.log(data)
+                    // console.log(data)
                     Object.assign(this.garage, data) // watch does not work this way then we need to use deep watch
                     Object.assign(this.updated_garage, this.garage)
                 }).always(() => {

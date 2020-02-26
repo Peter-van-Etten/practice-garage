@@ -24,12 +24,9 @@ from google.cloud import ndb
 from app.handlers import garages
 from app.handlers import cars
 
-# pve
-print('imports done in "main.py"...')
-# pve
-
 app = Flask(__name__)
 app.register_blueprint(garages.bp)
+app.register_blueprint(cars.bp)
 
 @app.route('/health-check')
 def root():
@@ -59,8 +56,7 @@ def create_cars():
         car = Car(garage=g.key, brand=g.brand, license_plate="abcd123")
         car.save()
     return 'OK'
-# pve
-# hieronder aangepast
+
 @app.route('/carlist')
 def list_cars():
     garages = [c.garage for c in Car.list()]
